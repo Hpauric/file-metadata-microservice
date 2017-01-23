@@ -1,0 +1,19 @@
+{
+  "name": "image-search-abstraction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hpauric/image-search-abstraction-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hpauric/image-search-abstraction-api/issues"
+  },
+  "homepage": "https://github.com/Hpauric/image-search-abstraction-api#readme"
+}
