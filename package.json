@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Hpauric/image-search-abstraction-api/issues"
   },
-  "homepage": "https://github.com/Hpauric/image-search-abstraction-api#readme"
+  "homepage": "https://github.com/Hpauric/image-search-abstraction-api#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "request": "^2.79.0",
+    "url": "^0.11.0"
+  }
 }
