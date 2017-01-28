@@ -1,3 +1,5 @@
+
+"use strict";
 const express = require('express');
 const app = express();
 const url = require('url');
@@ -38,6 +40,36 @@ function searchImgurGallery(apiUrl, callback) {
   request(options, getPics);
 }
 
+function storeInDatabase(searchTerm) {
+  var newSearchTerm = {
+    searchTerm: searchTerm
+  };
+  mongoClient.connect(mongodbURL, function(err, db) {
+    if (err) throw err;
+    var collection = db.collection('storedSearchTerms');
+    collection.insert(newSearchTerm, function(err, data) {
+      if (err) throw err;
+      console.log(JSON.stringify(newSearchTerm));
+      db.close();
+    });
+  });
+}
+
+function getLastTenSearchTerms(callback) {
+  mongoClient.connect(mongodbURL, function(err, db) {
+    if (err) throw err;
+    var collection = db.collection('storedSearchTerms');
+    collection.find({}, { '_id': 0, 'searchTerm' : 1}).sort({
+      $natural: -1
+    }).limit(10).toArray(function(err, documents) {
+      if (err) throw err;
+      console.log(JSON.stringify(documents));
+      callback(JSON.stringify(documents));
+      db.close();
+    });
+  });
+}
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
@@ -52,10 +84,19 @@ app.get('/search/*', function(req, res) {
   else {
     apiUrl = 'https://api.imgur.com/3/gallery/search/?q=' + userQuery;
   }
+  
+  storeInDatabase(userQuery);
   searchImgurGallery(apiUrl, function(bodyData) {
     res.send(bodyData);
   });
 });
+
+app.get('/history*', function(req, res) {
+  getLastTenSearchTerms(function(history) {
+    res.send(history);
+  });
+});
+
 
 app.listen(process.env.PORT, process.env.IP, function() {
   console.log("URL shortener listening on port " + process.env.PORT);
