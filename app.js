@@ -14,9 +14,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/meta', upload.any() , function(req, res) {
-  res.send(req.files[0].size);
+  console.log(req.files[0].size);
+  res.send("Size is: " + req.files[0].size + " bytes");
   //console.log(req.files[0]);
-  //console.log(req.files[0].size);
+  
   //console.log(req);
 });
 
