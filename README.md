@@ -1,17 +1,11 @@
-# image-search-abstraction-api
+# File Scales
 
-## User Story: Image Search
+## file-metadata-api
 
-I can get the image URLs, alt text and page urls for a set of images relating to a given search string.
+## User Story: Submit a FormData object
 
-## User Story: Paginate
+I can submit a FormData object that includes a file upload.
 
-I can paginate through the responses by adding a ?offset=2 parameter to the URL.
+## User Story: File Size
 
-## User Story: Search History
-
-I can get a list of the most recently submitted search strings.
-
-### Use 
-
-Add `/history` to view past ten search entries.
+ When I submit something, I will receive the file size in bytes within the JSON response.
