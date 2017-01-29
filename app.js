@@ -7,14 +7,16 @@ const upload = multer({ dest: './uploads' });
 
 //app.use( multer({ dest: './uploads' }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/form-index.html'));
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 app.post('/meta', upload.any() , function(req, res) {
-  res.send(req.files);
-  console.log(req.files[0]);
-  console.log(req.files[0].size)
+  res.send(req.files[0].size);
+  //console.log(req.files[0]);
+  //console.log(req.files[0].size);
   //console.log(req);
 });
 
